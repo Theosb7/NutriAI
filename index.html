@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NutriAI</title>
+</head>
+
+<body>
+  <!-- Topo da página -->
+  <header>
+    <h1>NutriAI</h1>
+
+    <nav>
+      <ul>
+        <li><a href="#resumo">Resumo</a></li>
+        <li><a href="#diario">Diário</a></li>
+        <li><a href="#chatbot">Chatbot</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main>
+
+    <!-- Seção de Resumo -->
+    <section id="resumo">
+      <h2>Resumo Diário</h2>
+
+      <ul>
+        <li>Calorias consumidas: 0 kcal</li>
+        <li>Meta diária: 2000 kcal</li>
+        <li>Água consumida: 0 L</li>
+      </ul>
+
+      <label for="progresso-calorias">Progresso de Calorias</label>
+      <meter
+        id="progresso-calorias"
+        value="0"
+        min="0"
+        max="2000">
+      </meter>
+    </section>
+
+    <!-- Seção do Diário Alimentar -->
+    <section id="diario">
+      <h2>Diário de Refeições</h2>
+
+      <article>
+        <h3>Café da Manhã</h3>
+        <p>Nenhuma refeição registrada.</p>
+      </article>
+
+      <article>
+        <h3>Almoço</h3>
+        <p>Nenhuma refeição registrada.</p>
+      </article>
+
+      <article>
+        <h3>Jantar</h3>
+        <p>Nenhuma refeição registrada.</p>
+      </article>
+    </section>
+  </main>
+
+  <!-- Barra lateral com Chatbot -->
+  <aside id="chatbot">
+    <h2>Chatbot Nutricional</h2>
+
+    <textarea
+      placeholder="Pergunte sobre calorias, receitas ou seu progresso...">
+    </textarea>
+
+    <button>Enviar</button>
+  </aside>
+
+  <!-- Rodapé -->
+  <footer>
+    <small>
+      Este aplicativo é apenas uma ferramenta de auxílio e não substitui
+      acompanhamento médico profissional.
+    </small>
+
+    <nav>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">GitHub</a></li>
+        <li><a href="#">Contato</a></li>
+      </ul>
+    </nav>
+  </footer>
+</body>
+</html>
