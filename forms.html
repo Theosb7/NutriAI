@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="forms-style.css">
+</head>
+<body>
+    <form action="/submit data">
+
+        <label for="Username">Nome de usuário:</label>
+        <input type="text">
+        <br>
+        <label for="Email">Seu melhor email 😉:</label>
+        <input type="text">
+        <br>
+        <label for="Password">Sua senha 🫣:</label>
+        <input type="password">
+        <br>
+        <label for="Birthdate">sua data de nascimento(eita como tá grandinho):</label>
+        <input type="date">
+        <br>
+
+        <p>Quais linguagens de interesse?</p>
+        <label for="html">Html</label>
+        <input type="checkbox" name="HTML" value="HTML">
+        <label for="html">CSS</label>
+        <input type="checkbox" name="CSS" value="CSS">
+        <label for="html">JavaScript</label>
+        <input type="checkbox" name="JavaScript" value="JavaScript">
+        <label for="html">Python</label>
+        <input type="checkbox" name="Python" value="Python">
+
+        <p>Qual o seu nível de aprendizado?</p>
+        <label for="iniciante">Iniciante
+            <input type="radio" name="nivel" value="iniciante">
+        </label>
+
+        <label for="intermediario">Intermediário
+            <input type="radio" name="nivel" value="intermediario">
+        </label>
+
+        <label for="avançado">Avançado
+            <input type="radio" name="nivel" value="avançado">
+        </label>
+
+        <p>Envie seu curriculo em formato PDF abaixo:</p>
+        <input type="file" accept=".pdf">
+
+        <br>
+        <br>
+
+        <label for="tamanho-camisa">Selecione o tamanho de sua camisa:</label>
+        <select name="tamanhos" id="tamanho-camisa">
+            <option value="p">P</option>
+            <option value="m">M</option>
+            <option value="g">G</option>
+            <option value="gg">GG</option>
+        </select>
+
+        <p>Porque você deseja participar fofinho?</p>
+        <textarea name="motivo" id="motivo"></textarea>
+
+        <br>
+
+        <button type="submit">Enviar</button>
+    </form>
+
