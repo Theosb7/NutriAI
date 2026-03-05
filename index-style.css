@@ -83,13 +83,14 @@ h2 {
 /* Seção Resumo */
 #resumo ul {
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  display: flex; /* Usando Flexbox em vez de Grid para forçar a mesma linha */
+  justify-content: space-between;
   gap: 15px;
   margin-bottom: 20px;
 }
 
 #resumo li {
+  flex: 1; /* Faz com que os três itens dividam o espaço igualmente na mesma linha */
   background: #f9f9f9;
   padding: 15px;
   border-radius: 8px;
@@ -204,4 +205,39 @@ footer nav ul {
 footer nav a {
   color: var(--primary-color);
   text-decoration: none;
+}
+
+/* =========================================
+   MEDIA QUERIES (RESPONSIVIDADE)
+========================================= */
+
+/* BREAKPOINT PARA TABLETS (Telas médias - até 1024px) */
+@media screen and (max-width: 1024px) {
+  #resumo {
+    aspect-ratio: auto; /* Remove a proporção 16:10 para não cortar o texto */
+    padding: 30px; 
+  }
+  
+  #resumo ul {
+    flex-wrap: wrap; /* Permite que os itens quebrem a linha se apertar muito */
+  }
+  
+  #resumo li {
+    flex: 1 1 45%; /* Cada item ocupa quase metade da tela no tablet */
+  }
+}
+
+/* BREAKPOINT PARA MOBILE (Celulares - até 768px) */
+@media screen and (max-width: 768px) {
+  #resumo {
+    width: 100%;
+    height: 100%;
+  }
+  #resumo ul {
+    flex-direction: column; /* Coloca os quadradinhos um embaixo do outro no celular */
+  }
+  
+  #resumo li {
+    width: 100%; /* Os itens ocupam a largura total da tela */
+  }
 }
