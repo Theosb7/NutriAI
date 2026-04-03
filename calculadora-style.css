@@ -20,18 +20,18 @@ body {
   color: var(--text-dark);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* Alinhado ao topo */
   min-height: 100vh;
-  padding: 20px;
+  padding: 40px 20px;
 }
 
-.form-container {
+.calc-container {
   background: var(--white);
   padding: 30px 40px;
   border-radius: 12px;
   box-shadow: var(--shadow);
   width: 100%;
-  max-width: 500px;
+  max-width: 700px; /* Um pouco mais largo para o conteúdo */
 }
 
 header {
@@ -46,6 +46,11 @@ header h1 {
   margin-bottom: 10px;
 }
 
+.subtitle {
+  color: #555;
+  margin-bottom: 15px;
+}
+
 .back-link {
   color: var(--primary-color);
   text-decoration: none;
@@ -56,6 +61,12 @@ header h1 {
 
 .back-link:hover {
   opacity: 0.8;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 20px;
 }
 
 .form-group {
@@ -87,6 +98,18 @@ select:focus {
   border-color: var(--primary-color);
 }
 
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+
+.radio-group input[type="radio"] {
+  accent-color: var(--primary-color);
+}
+
 .btn-submit {
   width: 100%;
   background-color: var(--primary-color);
@@ -97,9 +120,70 @@ select:focus {
   cursor: pointer;
   font-weight: bold;
   font-size: 1.1rem;
+  margin-top: 10px;
   transition: background-color 0.3s;
 }
 
 .btn-submit:hover {
   background-color: #116a6a; /* Darker shade of primary */
+}
+
+/* --- Seção de Resultados --- */
+#results {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+#results.hidden {
+  display: none;
+}
+
+#results h2, #results h3 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.results-grid, .macros-grid {
+  display: grid;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.results-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.macros-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.result-item, .macro-item {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.result-item h4, .macro-item h5 {
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 1rem;
+}
+
+.result-item p, .macro-item p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-dark);
+}
+
+.result-item.primary-result {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.result-item.primary-result h4,
+.result-item.primary-result p {
+  color: var(--white);
 }
