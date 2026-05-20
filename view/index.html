@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NutriAI</title>
-  <link rel="stylesheet" href="index-style.css">
+  <link rel="stylesheet" href="view/css/index-style.css">
 </head>
 
 <body>
@@ -14,10 +14,16 @@
 
     <nav>
       <ul>
-        <li><a href="#resumo">Resumo</a></li>
-        <li><a href="#diario">Diário</a></li>
-        <li><a href="calculadora.html">Calculadora</a></li>
-        <li><a href="#chatbot">Chatbot</a></li>
+        <li><a href="index.php">Painel</a></li>
+        <li><a href="index.php?action=calculadora">Calculadora</a></li>
+        <li><a href="index.php?action=quiz">Quiz</a></li>
+        <?php if (isset($_SESSION['usuario_id'])): ?>
+          <li><a href="index.php?action=users">Membros</a></li>
+          <li><a href="index.php?action=logout" style="color: #f1948a;">Sair (<?php echo htmlspecialchars($_SESSION['usuario_nome']); ?>)</a></li>
+        <?php else: ?>
+          <li><a href="index.php?action=login">Entrar</a></li>
+          <li><a href="index.php?action=register">Registrar</a></li>
+        <?php endif; ?>
       </ul>
     </nav>
   </header>
@@ -55,7 +61,7 @@
           <li>1 Fatia de Pão Integral (80 kcal)</li>
           <li>1/2 Abacate (160 kcal)</li>
         </ul>
-        <a href="forms.html" class="btn-add-food">Adicionar Alimento</a>
+        <a href="index.php?action=add-food" class="btn-add-food">Adicionar Alimento</a>
       </article>
 
       <article>
@@ -65,13 +71,13 @@
           <li>200g de Arroz Branco (260 kcal)</li>
           <li>Salada de Folhas Verdes (20 kcal)</li>
         </ul>
-        <a href="forms.html" class="btn-add-food">Adicionar Alimento</a>
+        <a href="index.php?action=add-food" class="btn-add-food">Adicionar Alimento</a>
       </article>
 
       <article>
         <h3>Jantar</h3>
         <p>Nenhuma refeição registrada.</p>
-        <a href="forms.html" class="btn-add-food">Adicionar Alimento</a>
+        <a href="index.php?action=add-food" class="btn-add-food">Adicionar Alimento</a>
       </article>
     </section>
   </main>

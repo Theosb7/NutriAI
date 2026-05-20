@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastrar-se - NutriAI</title>
+  <link rel="stylesheet" href="view/css/auth-style.css">
+</head>
+<body>
+  <header>
+    <h1>NutriAI</h1>
+    <nav>
+      <ul>
+        <li><a href="index.php">Painel Principal</a></li>
+        <li><a href="index.php?action=login">Entrar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="auth-container">
+    <h2>Criar Conta</h2>
+    <p class="subtitle">Faça seu cadastro para acessar as estatísticas do NutriAI</p>
+
+    <?php if (isset($error) && !empty($error)): ?>
+      <div class="alert alert-danger">
+        <?php echo htmlspecialchars($error); ?>
+      </div>
+    <?php endif; ?>
+
+    <form action="index.php?action=register" method="POST">
+      <div class="form-group">
+        <label for="nome">Nome Completo</label>
+        <input type="text" id="nome" name="nome" class="form-control" placeholder="Seu nome completo" required value="<?php echo isset($_POST['nome']) ? htmlspecialchars($_POST['nome']) : ''; ?>">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Endereço de E-mail</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="seuemail@exemplo.com" required value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+      </div>
+
+      <div class="form-group">
+        <label for="senha">Senha de Acesso</label>
+        <input type="password" id="senha" name="senha" class="form-control" placeholder="Mínimo 6 caracteres" required>
+      </div>
+
+      <button type="submit" class="btn-submit">Criar Minha Conta</button>
+    </form>
+
+    <div class="auth-footer">
+      Já possui uma conta? <a href="index.php?action=login">Faça Login</a>
+    </div>
+  </div>
+
+  <footer>
+    <small>NutriAI &copy; <?php echo date('Y'); ?> - Todos os direitos reservados.</small>
+  </footer>
+</body>
+</html>
