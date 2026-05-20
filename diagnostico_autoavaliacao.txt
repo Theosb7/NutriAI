@@ -1,0 +1,128 @@
+===============================================================
+  DIAGNÓSTICO DE AUTOAVALIAÇÃO - REESTRUTURAÇÃO MVC/Services
+  Projeto: NutriAI
+  Data: 20/05/2026
+  Equipe: Theo
+===============================================================
+
+1. Conseguimos remover 100% dos require de classes na pasta app/?
+---------------------------------------------------------------
+   RESPOSTA: SIM ✅
+
+   Dentro da pasta app/, não existe nenhum require_once ou
+   require manual apontando para outras classes do projeto.
+   O único arquivo que usa require é o run_migrations.php
+   (que é um script CLI executado à parte, fora do fluxo web).
+
+   Os únicos "include" existentes estão no UsuarioController.php,
+   mas são para renderizar arquivos de View (HTML), o que é o
+   comportamento correto e esperado do padrão MVC — o Controller
+   carrega a View correspondente à ação solicitada.
+
+   Todas as classes (Database, Usuario, UsuarioService,
+   UsuarioController, Router, AuthMiddleware) são carregadas
+   automaticamente pelo spl_autoload_register definido em
+   autoload.php na raiz do projeto.
+
+
+2. Onde sentimos mais dificuldade ao separar o CSS/JS das views?
+---------------------------------------------------------------
+   RESPOSTA: Nos caminhos relativos dos assets (CSS e JS).
+
+   O principal desafio foi entender que, como as Views são
+   servidas via include() a partir do index.php na RAIZ,
+   os caminhos de CSS/JS nos arquivos HTML precisam ser
+   relativos à raiz do projeto (ex: "view/css/auth-style.css"),
+   e NÃO relativos à pasta view/ onde o HTML está fisicamente.
+
+   Isso porque o navegador resolve os caminhos relativos com
+   base na URL da página (index.php na raiz), e não com base
+   na localização do arquivo PHP incluído.
+
+   Resumo da correção aplicada:
+   - ANTES (errado):  href="css/auth-style.css"
+   - DEPOIS (correto): href="view/css/auth-style.css"
+
+
+3. O mapeamento do Autoload está funcionando sem caminhos absolutos?
+---------------------------------------------------------------
+   RESPOSTA: SIM ✅
+
+   O autoload.php usa __DIR__ (diretório do próprio arquivo)
+   para construir os caminhos de forma dinâmica e portável.
+   Não existe nenhum caminho absoluto hardcoded como
+   "/home/theo/..." no código.
+
+   Funcionamento:
+   - Ao instanciar "new UsuarioController()", o PHP dispara
+     o spl_autoload_register.
+   - A função percorre as pastas:
+       app/controller/
+       app/model/
+       app/middleware/
+       app/services/
+       app/router/
+   - Ao encontrar "app/controller/UsuarioController.php",
+     faz o require_once automaticamente.
+
+   Teste: O fluxo completo Cadastro → Login → Listagem
+   funciona sem nenhum require manual de classe.
+
+
+===============================================================
+  ESTRUTURA FINAL DO PROJETO (Árvore)
+===============================================================
+
+NutriAI/
+├── index.php          ← Front Controller (ponto de entrada único)
+├── config.php         ← Configurações globais (DB_PATH, sessão)
+├── autoload.php       ← spl_autoload_register automático
+├── README.md
+├── requisitos.md
+├── resumo_html.md
+├── resumo_css.md
+├── app/
+│   ├── controller/
+│   │   └── UsuarioController.php   ← Lógica de fluxo
+│   ├── model/
+│   │   ├── Database.php            ← Singleton PDO SQLite
+│   │   ├── Usuario.php             ← Queries SQL (SELECT, INSERT)
+│   │   └── banco.sqlite            ← Banco de dados
+│   ├── middleware/
+│   │   └── AuthMiddleware.php      ← Proteção de rotas
+│   ├── services/
+│   │   └── UsuarioService.php      ← Regras de negócio
+│   ├── migration/
+│   │   └── run_migrations.php      ← Script de criação de tabelas
+│   └── router/
+│       └── Router.php              ← Mapeamento action→controller
+└── view/
+    ├── index.html                  ← Dashboard principal
+    ├── calculadora.html            ← Calculadora nutricional
+    ├── forms.html                  ← Formulário de alimentos
+    ├── quiz.html                   ← Quiz nutricional
+    ├── cadastro.html               ← Tela de registro
+    ├── login.html                  ← Tela de login
+    ├── listagem.html               ← Listagem de usuários
+    ├── css/
+    │   ├── index-style.css
+    │   ├── calculadora-style.css
+    │   ├── forms-style.css
+    │   ├── quiz-style.css
+    │   └── auth-style.css
+    └── js/
+        ├── calculadora.js
+        └── quiz.js
+
+===============================================================
+  CHECKLIST DE VALIDAÇÃO PARA O PROFESSOR
+===============================================================
+[x] index.php limpo (só config + autoload + router)
+[x] Nenhum SQL nas Views
+[x] Nenhum require manual de classes em app/
+[x] Autoload funcional com spl_autoload_register
+[x] Banco SQLite isolado em app/model/banco.sqlite
+[x] CSS/JS organizados em view/css/ e view/js/
+[x] Fluxo Cadastro → Login → Listagem funcional
+[x] Commit semântico realizado e push feito
+===============================================================
